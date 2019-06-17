@@ -170,3 +170,8 @@ debian/wireless-disable-regulatory.db-direct-loading.patch
 debian/overlayfs-permit-mounts-in-userns.patch
 
 # ABI maintenance
+
+# custom
+0001-arm64-dts-clearfog-gt-8k-add-wlan_disable-signal-hog.patch
+0002-dt-bindings-allow-up-to-four-clocks-for-orion-mdio.patch
+0003-net-mvmdio-allow-up-to-four-clocks-to-be-specified-f.patch

@@ -1,0 +1,31 @@
+From 200190efb1d05a1a03062f08437473ce1c88d3b0 Mon Sep 17 00:00:00 2001
+From: Josua Mayer <josua@solid-run.com>
+Date: Tue, 18 Jun 2019 10:10:44 -0400
+Subject: [PATCH 2/3] dt-bindings: allow up to four clocks for orion-mdio
+
+Armada 8040 needs four clocks to be enabled for MDIO accesses to work.
+Update the binding to allow the extra clock to be specified.
+
+Cc: stable@vger.kernel.org
+Fixes: 6d6a331f44a1 ("dt-bindings: allow up to three clocks for orion-mdio")
+Signed-off-by: Josua Mayer <josua@solid-run.com>
+---
+ Documentation/devicetree/bindings/net/marvell-orion-mdio.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Documentation/devicetree/bindings/net/marvell-orion-mdio.txt b/Documentation/devicetree/bindings/net/marvell-orion-mdio.txt
+index 42cd81090a2c..3f3cfc1d8d4d 100644
+--- a/Documentation/devicetree/bindings/net/marvell-orion-mdio.txt
++++ b/Documentation/devicetree/bindings/net/marvell-orion-mdio.txt
+@@ -16,7 +16,7 @@ Required properties:
+ 
+ Optional properties:
+ - interrupts: interrupt line number for the SMI error/done interrupt
+-- clocks: phandle for up to three required clocks for the MDIO instance
++- clocks: phandle for up to four required clocks for the MDIO instance
+ 
+ The child nodes of the MDIO driver are the individual PHY devices
+ connected to this MDIO bus. They must have a "reg" property given the
+-- 
+2.20.1
+

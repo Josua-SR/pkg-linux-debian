@@ -1,0 +1,58 @@
+From e97bb6d478c2943df0867f7fe72ffacc4f993301 Mon Sep 17 00:00:00 2001
+From: Thomas Schreiber <tschreibe@gmail.com>
+Date: Tue, 26 Feb 2019 08:46:11 +0200
+Subject: [PATCH] arm64: dts: clearfog-gt-8k: add wlan_disable signal hog
+
+There is currently no DT binding for GPIO rfkill signals. To make
+mini-PCIe attached WiFi devices work, use gpio-hog to hold the
+wlan_disable signal de-asserted.
+
+Signed-off-by: Thomas Schreiber <tschreibe@gmail.com>
+[baruch: add pinctrl node; rename tag]
+Signed-off-by: Baruch Siach <baruch@tkos.co.il>
+Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
+---
+ arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts b/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
+index 2468762283a5..9143aa13ceb1 100644
+--- a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
++++ b/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
+@@ -226,6 +226,11 @@
+ 		marvell,function = "gpio";
+ 	};
+ 
++	cp0_wlan_disable_pins: wlan-disable-pins {
++		marvell,pins = "mpp51";
++		marvell,function = "gpio";
++	};
++
+ 	cp0_sdhci_pins: sdhci-pins {
+ 		marvell,pins = "mpp55", "mpp56", "mpp57", "mpp58", "mpp59",
+ 			       "mpp60", "mpp61";
+@@ -235,7 +240,7 @@
+ 
+ &cp0_pcie0 {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&cp0_pci0_reset_pins>;
++	pinctrl-0 = <&cp0_pci0_reset_pins &cp0_wlan_disable_pins>;
+ 	reset-gpios = <&cp0_gpio2 0 GPIO_ACTIVE_LOW>;
+ 	status = "okay";
+ };
+@@ -253,6 +258,12 @@
+ 		output-low;
+ 	};
+ 
++	wlan_disable {
++		gpio-hog;
++		gpios = <19 GPIO_ACTIVE_LOW>;
++		output-low;
++	};
++
+ 	lte_disable {
+ 		gpio-hog;
+ 		gpios = <21 GPIO_ACTIVE_LOW>;
+-- 
+2.16.4
+
