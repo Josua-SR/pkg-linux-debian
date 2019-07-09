@@ -1,5 +1,6 @@
-linux (5.1.10-1~exp1sr1) unstable; urgency=medium
+linux (5.1.10-1~exp1sr2) UNRELEASED; urgency=medium
 
+  * arm64: enable HW_RANDOM_OMAP
   * clearfog gt: fix for mpcie wifi enable gpio
   * armada 8040: fix for mvmdio
 
